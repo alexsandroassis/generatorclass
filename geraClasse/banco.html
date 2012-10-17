@@ -1,0 +1,102 @@
+<pre>
+
+class db{{TABLE}} extends {{TABLE}}{
+    
+    private $conn;
+    
+    public function __construct(){
+        $this->conn = new Connection();
+   }
+    
+    public function insert(){
+        $sql = 'INSERT INTO {{TABLE}} ({{COLUNASSQL}}) VALUES ({{COLUNASPARAM}})';
+        $stmt = $this->conn->prepare($sql);
+        <!-- BEGIN BLOCK_PARAMINSERT -->
+        $stmt->bindParam({{ID}},$this->get_{{COLPARAM}}(),PDO::{{TIPOPARAM}});
+        <!-- END BLOCK_PARAMINSERT -->
+        $rs = $stmt->execute();
+        return $rs;
+    }
+    
+    public function update(){
+        $sql = 'UPDATE {{TABLE}} set {{COLUNASUPDATE}} WHERE 1=1{{COLUNASCLAUSULA}}';
+        $stmt = $this->conn->prepare($sql);
+        <!-- BEGIN BLOCK_PARAMUPDATE -->
+        $stmt->bindParam({{IDUPDATE}},$this->get_{{COLPARAMUPDATE}}(),PDO::{{TIPOPARAMUPDATE}});
+        <!-- END BLOCK_PARAMUPDATE -->
+        $rs = $stmt->execute();
+        return $rs;
+    }    
+
+    public function delete(){
+        $sql = 'DELETE FROM {{TABLE}} WHERE 1=1{{COLUNASCLAUSULADELETE}}';
+        $stmt = $this->conn->prepare($sql);
+        <!-- BEGIN BLOCK_PARAMDELETE -->
+        $stmt->bindParam({{IDDELETE}},$this->get_{{COLPARAMDELETE}}(),PDO::{{TIPOPARAMDELETE}});
+        <!-- END BLOCK_PARAMDELETE -->        
+        $rs = $stmt->execute();
+        return $rs;
+    }
+    
+    public function listarUm(){
+        $sql = 'SELECT {{COLUNASLISTASUM}} FROM {{TABLE}} WHERE 1=1 {{COLCLAUSULALISTARUM}}';
+        $stmt = $this->conn->prepare($sql);
+        <!-- BEGIN BLOCK_PARAMLISTARUM -->
+        $stmt->bindParam({{IDLISTARUM}},$this->get_{{COLPARAMLISTARUM}}(),PDO::{{TIPOPARAMLISTARUM}});
+        <!-- END BLOCK_PARAMLISTARUM -->
+        $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_OBJ);
+        if(is_object($rs)){
+            <!-- BEGIN BLOCK_SETVALORES -->
+            $this->set_{{METODOSET}}($rs->{{COLLISTARUM}});
+            <!-- END BLOCK_SETVALORES -->
+        }
+    }
+    
+    public function listarTodos(){
+        $sql = 'SELECT {{COLUNASLISTASTODOS}} FROM {{TABLE}}';
+        $rs = $this->conn->query($sql);
+        if($rs){
+            while($ln = $rs->fetch(PDO::FETCH_OBJ)){
+                ${{TABLE}} = new {{TABLE}}();
+                <!-- BEGIN BLOCK_SETVALORESTODOS -->
+                ${{TABLE}}->set_{{METODOLISTARTODOS}}($ln->{{COLLISTARTODOS}});
+                <!-- END BLOCK_SETVALORESTODOS -->
+                ${{TABLE}}s[] = ${{TABLE}};
+           }
+           return ${{TABLE}}s;
+        }else return false;
+    }
+
+    public function listarPorAtributo(){
+        $sql = 'SELECT {{COLUNASLISTARATRIBUTO}} FROM {{TABLE}} WHERE 1=1';
+        <!-- BEGIN BLOCK_PORATRIBUTO -->
+        if($this->get_{{CLAUSULAATRIBUTO}} != '') $sql .= ' AND {{CLAUSULAATRIBUTO}} = ?';
+        <!-- END BLOCK_PORATRIBUTO -->
+        
+        $i = 0;
+        <!-- BEGIN BLOCK_PARAMLISTARATRIBUTO -->
+        if($this->get_{{CLAUSULAATRIBUTOVALIDA}} != ''){
+            $stmt->bindParam($i++,$this->get_{{COLPARAMLISTARUM}}(),PDO::{{TIPOPARAMATRIBUTO}});
+            $i++;
+        }
+        <!-- END BLOCK_PARAMLISTARATRIBUTO -->
+        
+        $rs = $this->conn->query($sql);
+        if($rs){
+            while($ln = $rs->fetch(PDO::FETCH_OBJ)){
+                ${{TABLE}} = new {{TABLE}}();
+                <!-- BEGIN BLOCK_SETVALORESATRIBUTO -->
+                ${{TABLE}}->set_{{METODOLISTARATRIBUTO}}($ln->{{COLLISTARATRIBUTO}});
+                <!-- END BLOCK_SETVALORESATRIBUTO -->
+                ${{TABLE}}s[] = ${{TABLE}};
+           }
+           return ${{TABLE}}s;
+        }else return false;
+    }
+
+
+}
+
+
+</pre>

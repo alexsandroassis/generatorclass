@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>{{TITLE}}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="{{TITLE}}" />
+		<meta name="author" content="{{TITLE}}" />
+
+		<!-- Le styles -->
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />		
+
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<!-- Le fav and touch icons -->
+		<link rel="shortcut icon" href="images/favicon.ico" />
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114-precomposed.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72-precomposed.png" />
+		<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-57-precomposed.png" />
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	</head>
+
+	<body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="./">ERP - Duweek</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li ><a href="./">Resultados</a></li>
+						<li class="active"><a href="./customers">Cliente e Fornecedor</a></li>
+						<li ><a href="./packages">lançamentos</a></li>
+						<li ><a href="./services">Caixa</a></li>								
+						<li ><a href="./services">Contas</a></li>
+						<li ><a href="./services">Pedidos</a></li>					
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+
+<div class="container">
+
+<div class="row">
+	<div class="span5">
+		<h3>
+			<i class="icon-barcode"></i> PREVISÃO
+		</h3>		
+	</div>
+</div>
+
+<ul class="nav nav-tabs">
+	<!-- BEGIN BLOCK_MESES -->
+	<li{{MESATIVO}}><a href="?o=m&m={{MESLINK}}">{{MES}}</a></li>
+	<!-- END BLOCK_MESES -->
+	<li{{S1ATIVO}}><a href="?o=s&s=1">Jul-Dez</a></li>
+	<li{{S2ATIVO}}><a href="?o=s&s=2">Jan-Jun</a></li>
+	<li{{A1ATIVO}}><a href="?o=a&a=1">1 Ano</a></li>
+	<li{{A2ATIVO}}><a href="?o=a&a=2">2 Ano</a></li>
+	<li{{A3ATIVO}}><a href="?o=a&a=5">5 Ano</a></li>
+	<li{{A5ATIVO}}><a href="?o=a&a=10">10 Ano</a></li>  
+</ul>
+
+<table class="table table-bordered table-condensed">
+<tbody>
+	<tr><td colspan="4"><h4>RESULTADO MENSAL</h4></td></tr>
+	<tr>
+		<td colspan="2" class="span6"><div id="praondevai" style="height: 300px; width: 610px;"></div></td>
+		<td colspan="2" class="span6"><div id="deondevem" style="height: 300px; width: 300px;"></div></td>		
+	</tr>
+	<tr>
+		<td colspan="2" class="span6" style="text-align: right;">TOTAL DE RECEITAS <small>(Receitas fixas + Outras receitas)</small></td>
+		<td colspan="2" class="span6" style="text-align: right;">{{TOTALENTRADAS}}</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" class="span6" style="text-align: right;">TOTAL DE DESPESAS<small> (Despesas fixas + Outras despesas)</small> )</small></td>
+		<td colspan="2" class="span6" style="text-align: right;">{{TOTALSAIDAS}}</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" class="spann9" style="text-align: right;">( TOTAL DE RECEITAS ) - ( TOTAL DE DESPESAS )</td>
+		<td colspan="2" class="span6" style="text-align: right;">{{TOTALGERAL}}</td>						
+	</tr>
+	
+</tbody>
+</table>
+
+<table class="table table-bordered table-condensed table-hover">
+<tbody>
+	<tr><td colspan="4"><h4>RECEITAS FIXAS</h4></td></tr>
+	<tr style="font-weight: bold;">
+		<td width="40%">CLIENTE / FORNECEDOR</td>
+		<td width="40%">MARCADOR</td>
+		<td width="8%" style="text-align: center;">DIA</td>
+		<td width="12%" style="text-align: right;">VALOR</td>
+	</tr>
+	
+	<!-- BEGIN BLOCK_CREDFIXAS -->
+	<tr>
+		<td width="40%">{{CREDFIXASCLIFOR}}</td>
+		<td width="40%">{{CREDFIXASMARCADOR}}</td>
+		<td width="8%" style="text-align: center;">{{CREDFIXASDIA}}</td>
+		<td width="12%" style="text-align: right;">{{CREDFIXASVALOR}}</td>
+	</tr>
+	<!-- END BLOCK_CREDFIXAS -->
+
+	<tr>
+		<td colspan="3" style="font-weight: bold; text-align: right;">TOTAL DAS RECEITAS FIXAS</td>
+		<td style="text-align: right;">{{CREDFIXASTOTAL}}</td>
+	</tr>
+
+
+	<tr><td colspan="4"><h4>OUTRAS RECEITAS</h4></td></tr>
+	<tr style="font-weight: bold;">
+		<td width="40%">CLIENTE / FORNECEDOR</td>
+		<td width="40%">MARCADOR</td>
+		<td width="8%" style="text-align: center;">DIA</td>
+		<td width="12%" style="text-align: right;">VALOR</td>
+	</tr>
+	
+	<!-- BEGIN BLOCK_CRED -->
+	<tr>
+		<td width="40%">{{CREDCLIFOR}}</td>
+		<td width="40%">{{CREDMARCADOR}}</td>
+		<td width="8%" style="text-align: center;">{{CREDDIA}}</td>
+		<td width="12%" style="text-align: right;">{{CREDVALOR}}</td>
+	</tr>
+	<!-- END BLOCK_CRED -->
+
+	<tr>
+		<td colspan="3" style="font-weight: bold; text-align: right;">TOTAL DAS OUTRAS RECEITAS</td>
+		<td style="text-align: right;">{{CREDTOTAL}}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="font-weight: bold; text-align: right;">TOTAL DAS ENTRADAS</td>
+		<td style="text-align: right;">{{TOTALENTRADAS}}</td>
+	</tr>
+
+
+</tbody>
+
+</table>
+
+<table class="table table-bordered table-condensed table-hover">
+<tbody>
+	<tr><td colspan="4"><h4>DESPESAS FIXAS</h4></td></tr>
+	<tr style="font-weight: bold;">
+		<td width="40%">CLIENTE / FORNECEDOR</td>
+		<td width="40%">MARCADOR</td>
+		<td width="8%" style="text-align: center;">DIA</td>
+		<td width="12%" style="text-align: right;">VALOR</td>
+	</tr>
+	
+	<!-- BEGIN BLOCK_DESPFIXAS -->
+	<tr>
+		<td width="40%">{{DESPFIXASCLIFOR}}</td>
+		<td width="40%">{{DESPFIXASMARCADOR}}</td>
+		<td width="8%" style="text-align: center;">{{DESPFIXASDIA}}</td>
+		<td width="12%" style="text-align: right;">{{DESPFIXASVALOR}}</td>
+	</tr>
+	<!-- END BLOCK_DESPFIXAS -->
+
+	<tr>
+		<td colspan="3" style="font-weight: bold; text-align: right;">TOTAL DAS DESPESAS FIXAS</td>
+		<td style="text-align: right;">{{DESPFIXASTOTAL}}</td>
+	</tr>
+
+
+	<tr><td colspan="4"><h4>OUTRAS DESPESAS</h4></td></tr>
+	<tr style="font-weight: bold;">
+		<td width="40%">CLIENTE / FORNECEDOR</td>
+		<td width="40%">MARCADOR</td>
+		<td width="8%" style="text-align: center;">DIA</td>
+		<td width="12%" style="text-align: right;">VALOR</td>
+	</tr>
+	
+	<!-- BEGIN BLOCK_DESP -->
+	<tr>
+		<td width="40%">{{DESPCLIFOR}}</td>
+		<td width="40%">{{DESPMARCADOR}}</td>
+		<td width="8%" style="text-align: center;">{{DESPDIA}}</td>
+		<td width="12%" style="text-align: right;">{{DESPVALOR}}</td>
+	</tr>
+	<!-- END BLOCK_DESP -->
+
+	<tr>
+		<td colspan="3" style="font-weight: bold; text-align: right;">TOTAL DAS OUTRAS DESPESAS</td>
+		<td style="text-align: right;">{{DESPTOTAL}}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="font-weight: bold; text-align: right;">TOTAL DAS SAIDAS</td>
+		<td style="text-align: right;">{{TOTALSAIDAS}}</td>
+	</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+	<script type="text/javascript" src="highcharts/js/highcharts.js"></script>
+	<script type="text/javascript">
+        
+        $(function () {
+            var chart;
+            var chart1;
+            
+            $(document).ready(function() {
+                chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'deondevem',
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false
+                    },
+                    title: {
+                        text: 'De onde vem o Dinheiro'
+                    },
+                    tooltip: {
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b> - R$ '+ this.y ;
+                        }
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: 'Receitas',
+                        data: [{{NOMEMARCADORES}}]
+                    }]
+                });
+            });
+            
+            chart1 = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'praondevai',
+                    type: 'column'
+                },
+                title: {
+                    text: 'Pra onde vai o Dinheiro'
+                },
+                xAxis: {
+                    categories: [{{MARCADORDESP}}],
+                    labels:{enabled : false}
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Valores das Despesas'
+                    }
+                },
+                tooltip: {
+                    formatter: function() {
+                        return ''+
+                            this.x +' - R$ '+ this.y + ' ';
+                    }
+                },
+                plotOptions: {
+                   column: {
+                        dataLabels: {
+                            enabled: false
+                        },
+                        colorByPoint: true
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    showInLegend: false,
+                    name: 'Valor',
+                    data: [{{VALORDESP}}]
+                }]
+            });
+            
+            
+        });        
+        
+	</script>
+
+
+</body>
+</html>

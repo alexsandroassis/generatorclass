@@ -1,0 +1,23 @@
+class {{TABLE}}{
+ 
+    <!-- BEGIN BLOCK_COLUNA -->
+    private ${{COLUNA}};
+    <!-- END BLOCK_COLUNA -->
+    private $tabela;    	
+    
+    public function __construct(){
+        $this->tabela  = '{{TABLE}}';
+    }
+
+    <!-- BEGIN BLOCK_METODO -->
+    public function set_{{COLUNAMETODO}}(${{COLUNAMETODO}}){
+        $this->{{COLUNAMETODO}} = ${{COLUNAMETODO}};
+    }
+
+    public function get_{{COLUNAMETODO}}(){
+        return $this->{{COLUNAMETODO}};
+    }
+
+    <!-- END BLOCK_METODO -->
+    
+}

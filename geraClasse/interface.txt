@@ -1,4 +1,4 @@
-class {{TABLE}}{
+abstract class {{TABLE}} extend abstrair{
  
     <!-- BEGIN BLOCK_COLUNA -->
     private ${{COLUNA}};

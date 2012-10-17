@@ -1,3 +1,9 @@
+<?php
+
+require_once( "../classes/clsAbstrair.php" );
+
 {{ENTIDADE}}
 {{BANCODEDADOS}}
 {{DBCLASSE}}
+
+?>

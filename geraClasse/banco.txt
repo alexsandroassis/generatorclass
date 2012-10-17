@@ -1,4 +1,4 @@
-class db{{TABLE}} extends {{TABLE}}{
+abstract class db_{{TABLE}} extends {{TABLE}}{
     
     private $conn;
     
